@@ -1,0 +1,49 @@
+Private Sub ResetFontSizeMenuItem()
+  sCommon = "SETF(""User.Hypot"",""SQRT(Height^2+Width^2)/1 in"")+" & _
+   "SETF(""User.FontSize"",""MIN(10 pt,10 pt*User.Hypot)"" )+" & _
+   "SETF(""User.TextWidth"",""TEXTWIDTH(TheText)"" )+" & _
+   "SETF(""TxtPinX"",""Controls.TextPosition"" )+" & _
+   "SETF(""TxtPiny"",""Controls.TextPosition.Y"" )+" & _
+   "SETF(""Char.size"",""user.FontSize"" )+" & _
+   "SETF(""Para.IndFirst"",""Width*-0.0833"" )+" & _
+   "SETF(""Para.IndLeft"",""Width*0.0833"" )+" & _
+   "SETF(""Para.SpLine"",""-100%"" )+" & _
+   "SETF(""LeftMargin"",""1 pt"" )+" & _
+   "SETF(""RightMargin"",""1 pt"" )+" & _
+   "SETF(""TopMargin"",""1 pt"" )+" & _
+   "SETF(""BottomMargin"",""1 pt"" )+" & _
+   "SETF(""TxtWidth"",""MIN(TEXTWIDTH(TheText),Width )"" )+" & _
+   "SETF(""TxtHeight"",""TEXTHEIGHT(TheText,TxtWidth)"" )+" & _
+   "SETF(""TxtAngle"",""IF(BITXOR(FlipX,FlipY),1,-1)*Angle"")+" & _
+   "SETF(""TxtLocPinX"",""TxtWidth/2"" )+" & _
+   "SETF(""TxtLocPiny"",""TxtHeight/2"" )"
+  sRF_Menu = QuoteMe("Reset FontSize")
+  sRF_Action = "SETF(""User.Hypot"",""SQRT(Height^2+Width^2)/1 in"")+" & _
+   "SETF(""User.FontSize"",""MIN(10 pt,10 pt*User.Hypot)"" )+" & _
+   "SETF(""User.TextWidth"",""TEXTWIDTH(TheText)"" )+" & _
+   "SETF(""Char.size"",""user.fontsize"")+" & _
+   "SETF(""Para.IndFirst"",""Width*-0.0833"" )+" & _
+   "SETF(""Para.IndLeft"",""Width*0.0833"" )+" & _
+   "SETF(""Para.SpLine"",""-100%"" )+" & _
+   "SETF(""LeftMargin"",""1 pt"" )+" & _
+   "SETF(""RightMargin"",""1 pt"" )+" & _
+   "SETF(""TopMargin"",""1 pt"" )+" & _
+   "SETF(""BottomMargin"",""1 pt"" )+" & _
+   "SETF(""TextBkgndTrans"",""30%"" )+" & _
+   "SETF(""TextBkgnd"",""0"" )+" & _
+   "SETF(""TxtPinX"",""Controls.TextPosition"" )+" & _
+   "SETF(""TxtPiny"",""Controls.TextPosition.Y"" )+" & _
+   "SETF(""TxtLocPinX"",""TxtWidth/2"" )+" & _
+   "SETF(""TxtLocPiny"",""TxtHeight/2"" )"
+  With ActiveWindow.Selection(1)
+    On Error Resume Next
+    Default_Format
+    .AddNamedRow visSectionUser, "Hypot", 0
+    .AddNamedRow visSectionUser, "FontSize", 0
+    .AddNamedRow visSectionUser, "TextWidth", 0
+    .AddNamedRow visSectionUser, "TextAt", 0
+    .AddNamedRow visSectionAction, "ResetFontSize", 0
+    .Cells("Actions.ResetFontSize").FormulaForceU = sRF_Menu
+    .Cells("Actions.ResetFontSize.Action").Formula = sRF_Action
+  End With
+End Sub
