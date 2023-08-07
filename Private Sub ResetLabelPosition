@@ -1,0 +1,36 @@
+Private Sub ResetLabelPosition(shp As Shape)
+    On Error Resume Next
+    With shp
+        ' reset Label Position
+        If Not .CellExists("controls.TextPosition", 1) Then
+            'Debug.Assert .AddNamedRow(visSectionControls, "TextPosition", 0)
+            irow = .AddNamedRow(visSectionControls, "TextPosition", 0)
+        Else
+            irow = .CellsRowIndexU("Controls.TextPosition")
+        End If
+        ' reset Label Size
+        .CellsSRC(visSectionControls, irow, visCtlX).FormulaForceU = "Width*0.5"
+        .CellsSRC(visSectionControls, irow, visCtlY).FormulaForceU = "-TxtHeight*0.5"
+        .CellsSRC(visSectionObject, visRowTextXForm, visXFormPinX).FormulaForceU = "SETATREF(Controls.TextPosition)"
+        .CellsSRC(visSectionObject, visRowTextXForm, visXFormPinY).FormulaForceU = "SETATREF(Controls.TextPosition.Y)"
+        
+        'reset standard font to scaled 10pt, Consolas
+        ' .CellsSRC(visSectionCharacter, 0, visCharacterFont).FormulaForceU = "=FONTTOID(""Consolas"")"
+        'added /droponpagescale  20190429-dam
+          ' .CellsSRC(visSectionCharacter, 0, visCharacterSize).FormulaForceU = "10 pt*(Width/1 in)"
+          ' .CellsSRC(visSectionCharacter, 0, visCharacterSize).FormulaForceU = "10 pt*(Width/1 in)/droponpagescale"
+        
+        'reset text block to 25% opacity, with default tabs at 1/10th of the shape width
+        .CellsSRC(visSectionObject, visRowText, visTxtBlkBkgndTrans).FormulaForceU = "25%"
+        .CellsSRC(visSectionObject, visRowText, visTxtBlkDefaultTabStop).FormulaForceU = "Width/10"
+    
+        ' Standard formatting
+        .CellsSRC(visSectionParagraph, 0, visSpaceLine).FormulaForceU = "-100%"
+        .CellsSRC(visSectionObject, visRowText, visTxtBlkLeftMargin).FormulaForceU = "1 pt"
+        .CellsSRC(visSectionObject, visRowText, visTxtBlkRightMargin).FormulaForceU = "1 pt"
+        .CellsSRC(visSectionObject, visRowText, visTxtBlkTopMargin).FormulaForceU = "1 pt"
+        .CellsSRC(visSectionObject, visRowText, visTxtBlkBottomMargin).FormulaForceU = "1 pt"
+        .CellsSRC(visSectionObject, visRowTextXForm, visXFormWidth).FormulaU = "(TEXTWIDTH(TheText))"
+        .CellsSRC(visSectionObject, visRowTextXForm, visXFormHeight).FormulaU = "(TEXTHEIGHT(TheText,TEXTWIDTH(TheText)))"
+    End With ' shp
+End Sub ' ResetLabelPosition
