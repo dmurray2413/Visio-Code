@@ -1,0 +1,21 @@
+
+Sub ApplyLabelActions()
+    On Error Resume Next
+    Dim sel As Selection
+    Dim sec As Section
+    Dim shp As Shape
+    
+    Set sel = ActiveWindow.Selection    ' create "selection"
+    
+    For x = 1 To sel.Count              ' iterate all shapes (from first to last) in selection
+        Set shp = sel(x)                ' set current selected shape
+
+        'ClearUserDefinedCells shp
+        'ClearShapeData shp
+        ' ClearShapeActions shp
+        ResetLabelPosition shp
+        AddUserFields shp
+        AddLabelActions shp
+
+    Next x
+End Sub 'Sub ApplyLabelActions
