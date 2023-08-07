@@ -1,0 +1,78 @@
+Private Sub Default_Format()
+  With ActiveWindow.Selection(1)
+    On Error Resume Next
+    
+    .DeleteSection visSectionAction
+    
+    Default_Format
+    
+    'Add User Fields
+    If Not .CellExists("user.Hypot", 1) Then
+    .AddNamedRow visSectionUser, "Hypot", 0
+    End If
+    .Cells("user.Hypot").Formula = "SQRT(Height^2+Width^2)/1 in"
+    
+    If Not .CellExists("user.FontSize", 1) Then
+    .AddNamedRow visSectionUser, "FontSize", 0
+    End If
+    .Cells("user.FontSize").Formula = "MIN(STD_FONTSIZE,STD_FONTSIZE*User.Hypot)"
+    
+    If Not .CellExists("user.TextWidth", 1) Then
+    .AddNamedRow visSectionUser, "TextWidth", 0
+    End If
+    .Cells("user.TextWidth").Formula = "TEXTWIDTH(TheText)"
+    
+    If Not .CellExists("user.TextAt", 1) Then
+    .AddNamedRow visSectionUser, "TextAt", 0
+    End If
+    .Cells("user.TextAt").FormulaU = "=""Center"""
+    
+    'CenterText
+    If Not .CellExists("Actions.CenterText", 1) Then
+    .AddNamedRow visSectionAction, "CenterText", 0
+    End If
+    .Cells("Actions.CenterText").FormulaForceU = sL_Menu
+    .Cells("Actions.CenterText.Action").Formula = sL_Action
+    .Cells("Actions.CenterText.Checked").Formula = "=STRSAME(User.TextAt,""Center"")"
+    
+    'LeftText
+    If Not .CellExists("Actions.LeftText", 1) Then
+    .AddNamedRow visSectionAction, "LeftText", 0
+    End If
+    .Cells("Actions.LeftText").FormulaForceU = sL_Menu
+    .Cells("Actions.LeftText.Action").Formula = sL_Action
+    .Cells("Actions.LeftText.Checked").Formula = "=STRSAME(User.TextAt,""Left"")"
+    
+    'RightText
+    If Not .CellExists("Actions.LeftText", 1) Then
+    .AddNamedRow visSectionAction, "RightText", 0
+    End If
+    .Cells("Actions.RightText").FormulaForceU = sR_Menu
+    .Cells("Actions.RightText.Action").Formula = sR_Action
+    .Cells("Actions.RightText.Checked").Formula = "=STRSAME(User.TextAt,""Right"")"
+    
+    'TopText
+    If Not .CellExists("Actions.TopText", 1) Then
+    .AddNamedRow visSectionAction, "TopText", 0
+    End If
+    .Cells("Actions.TopText").FormulaForceU = sT_Menu
+    .Cells("Actions.TopText.Action").Formula = sT_Action
+    .Cells("Actions.TopText.Checked").Formula = "=STRSAME(User.TextAt,""Top"")"
+    
+    'BottomText
+    If Not .CellExists("Actions.BottomText", 1) Then
+    .AddNamedRow visSectionAction, "BottomText", 0
+    End If
+    .Cells("Actions.BottomText").FormulaForceU = sB_Menu
+    .Cells("Actions.BottomText.Action").Formula = sB_Action
+    .Cells("Actions.BottomText.Checked").Formula = "=STRSAME(User.TextAt,""Bottom"")"
+    
+    'CenterText
+    If Not .CellExists("Actions.CenterText", 1) Then
+    .AddNamedRow visSectionAction, "CenterText", 0
+    End If
+    .Cells("Actions.CenterText").FormulaForceU = sC_Menu
+    .Cells("Actions.CenterText.Action").Formula = sC_Action
+    .Cells("Actions.CenterText.Checked").Formula = "=STRSAME(User.TextAt,""Center"")"
+End With
+End Sub 'Private Sub Default_Format
