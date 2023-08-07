@@ -1,0 +1,10 @@
+Private Sub ClearShapeData(shp As Shape)
+    On Error Resume Next
+    With shp
+        ' Clear out any existing rows in the "Shape Data" section
+        For y = .RowCount(visSectionProp) - 1 To 0 Step -1
+            ' in current shape delete current row in section "Shape Data"
+            .DeleteRow visSectionProp, y
+        Next y
+    End With ' shp
+End Sub ' ClearShapeData
