@@ -1,0 +1,10 @@
+Private Sub ClearShapeActions(shp As Shape)
+    On Error Resume Next
+    With shp
+        ' Clear out any existing rows in the "Actions" section
+        For y = .RowCount(visSectionAction) - 1 To 0 Step -1
+            ' in current shape delete current row in section "Actions"
+            .DeleteRow visSectionAction, y
+        Next y
+    End With ' shp
+End Sub ' ClearShapeActions
