@@ -1,0 +1,40 @@
+Private Sub AddUserFields(shp As Shape)
+    On Error Resume Next
+    With shp
+        ' Add User Fields
+        ' AntiScale
+        If .CellExists("user.AntiScale", 0) Then
+            irow = .CellsRowIndex("user.AntiScale")
+        Else
+            'irow = .CellsRowIndexU("user.AntiScale")
+            irow = .AddNamedRow(visSectionUser, "AntiScale", 0)
+        End If
+        .CellsSRC(visSectionUser, irow, visUserValue).RowNameU = "AntiScale"
+        .CellsSRC(visSectionUser, irow, visUserValue).FormulaForceU = _
+            "IF(DropOnPageScale=1,User.AntiScale.Prompt,DropOnPageScale)"
+        .CellsSRC(visSectionUser, irow, visUserPrompt).FormulaForceU = _
+            """IF(DropOnPageScale=1,User.AntiScale.Prompt,DropOnPageScale)"""
+                    
+        ' HasText
+        If .CellExists("user.HasText", 0) Then
+            irow = .CellsRowIndex("user.HasText")
+        Else
+            irow = .CellsRowIndexU("user.HasText")
+            'irow = .AddNamedRow(visSectionUser, "HasText", 0)
+        End If
+        .CellsSRC(visSectionUser, irow, visUserValue).RowNameU = "HasText"
+        .CellsSRC(visSectionUser, irow, visUserValue).FormulaForceU = _
+            "NOT(OR(HideText,STRSAME(SHAPETEXT(TheText),"""")))"
+        
+        ' LabelPos
+        If .CellExists("user.LabelPos", 0) Then
+            irow = .CellsRowIndex("user.LabelPos")
+        Else
+            irow = .CellsRowIndexU("user.LabelPos")
+            'irow = .AddNamedRow(visSectionUser, "LabelPos", 0)
+        End If
+        .CellsSRC(visSectionUser, irow, visUserValue).RowNameU = "LabelPos"
+        .CellsSRC(visSectionUser, irow, visUserValue).FormulaForceU = _
+            """Bottom"""
+    End With ' shp
+End Sub ' AddUserFields
