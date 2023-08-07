@@ -1,0 +1,34 @@
+' =======================================================================================
+' Module Name:  Dans_Visio_Code (DansVisioCode.bas)
+' Author:       DMurray
+' Purpose:      My Visio Shape Customizations
+' Version:      v2014-08-06
+' =======================================================================================
+'Version History
+'20140806.01 Commenced trying to use Version Control
+'20140806.02 Begin declaring and using PUBLIC Variables
+
+' =======================================================================================
+'Attribute VB_GlobalNameSpace = False
+'Attribute VB_Creatable = False
+'Attribute VB_PredeclaredId = True
+'Attribute VB_Exposed = True
+'Attribute VB_Name = "Dans_Visio_Code"
+
+Const STD_FONTSIZE = "10 pt"
+' Visio only accesses Fonts by number, which are variable from machine to machine, and day to day
+' Const STD_FONTFACE = 72 '<-- don't use this anymore, instead use 'FONTTOID()' which is a SHAPESHEET function, and is not available in VBA
+Const STD_FONTFACE = "FONTTOID(""Consolas"")" '<-- instead use this.  The font name is CaSe_SenSiTiVe!!! (bastards)
+'Limit shape width to between 0.25 <=>1.00in
+Const CON_SHP_WIDTH As String = "BOUND(0 ft 1 in,0,FALSE,0.25 in*ThePage!DrawingScale/ThePage!PageScale,1 in*ThePage!DrawingScale/ThePage!PageScale)"
+'Limit shape height to between 0.25 <=>1.00in
+Const CON_SHP_HEIGHT As String = "BOUND(0 ft 1 in,0,FALSE,0.25 in*ThePage!DrawingScale/ThePage!PageScale,1 in*ThePage!DrawingScale/ThePage!PageScale)"
+'limit shape location to within printable page
+'limit shape horizontal placement
+Const CON_PINX As String = "BOUND(0 ft 8.5 in,0,FALSE,ThePage!PageLeftMargin*ThePage!DrawingScale/ThePage!PageScale+Width/2,ThePage!PageWidth-ThePage!PageLeftMargin*ThePage!DrawingScale/ThePage!PageScale-Width/2)"
+'limit shape vertical placement
+Const CON_PINY As String = "BOUND(0 ft 5.5 in,0,FALSE,ThePage!PageLeftMargin*ThePage!DrawingScale/ThePage!PageScale+Height/2,ThePage!PageHeight-ThePage!PageLeftMargin*ThePage!DrawingScale/ThePage!PageScale-Height/2)"
+'Print Margins [2019-05-07]
+Const CON_PRNT_MARGIN As String = "PageTopMargin*ThePage!DrawingScale/ThePage!PageScale/ThePage!ScaleX"
+'Charcacter sizes [2019-05-09]
+Const CON_CHAR_SIZE As String = "BOUND(,0,FALSE,8 pt/ThePage!ScaleX,24 pt/ThePage!ScaleX)"
