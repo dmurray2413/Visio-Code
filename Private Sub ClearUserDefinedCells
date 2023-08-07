@@ -1,0 +1,10 @@
+Private Sub ClearUserDefinedCells(shp As Shape)
+    On Error Resume Next
+    With shp
+        ' Clear out any existing rows in the "User-defined Cells" section
+        For y = .RowCount(visSectionUser) - 1 To 0 Step -1
+            ' in current shape delete current row in section "User-defined Cells"
+            .DeleteRow visSectionUser, y
+        Next y
+    End With ' shp
+End Sub ' ClearUserDefinedCells
