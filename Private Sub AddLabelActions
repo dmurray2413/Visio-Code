@@ -1,0 +1,90 @@
+Private Sub AddLabelActions(shp As Shape)
+    On Error Resume Next
+    With shp
+        If .CellExists("Actions.LabelPos", 0) Then
+            irow = .CellsRowIndex("Actions.LabelPos")
+        Else
+            irow = .AddNamedRow(visSectionAction, "LabelPos", 0)
+        End If
+        .CellsSRC(visSectionAction, irow, visActionMenu).RowNameU = "LabelPos"
+        .CellsSRC(visSectionAction, irow, visActionMenu).FormulaForceU = """Label Position"""
+        .CellsSRC(visSectionAction, irow, visActionBeginGroup).FormulaForceU = "true"
+        
+        'LabelCenter
+        If .CellExists("Actions.LabelCenter", 0) Then
+            irow = .CellsRowIndex("Actions.LabelCenter")
+        Else
+            irow = .AddNamedRow(visSectionAction, "LabelCenter", 0)
+        End If
+        .CellsSRC(visSectionAction, irow, visActionMenu).RowNameU = "LabelCenter"
+        .CellsSRC(visSectionAction, irow, visActionAction).FormulaForceU = "GUARD(SETF(""Controls.TextPosition"",""Width/2"")+SETF(""Controls.TextPosition.Y"",""height/2"")+SETF(""Para.HorzAlign"",""1"")+SETF(GetRef(User.LabelPos),""""""Center""""""))"
+        .CellsSRC(visSectionAction, irow, visActionMenu).FormulaForceU = """&Center"""
+        .CellsSRC(visSectionAction, irow, visActionChecked).FormulaForceU = "STRSAME(User.LabelPos,""Center"")"
+        .CellsSRC(visSectionAction, irow, visActionDisabled).FormulaForceU = "HideText"
+        .CellsSRC(visSectionAction, irow, visActionFlyoutChild).FormulaForceU = "TRUE"
+        
+        'LabelTop
+        If .CellExists("Actions.LabelTop", 0) Then
+            irow = .CellsRowIndex("Actions.LabelTop")
+        Else
+            irow = .AddNamedRow(visSectionAction, "LabelTop", 0)
+        End If
+        .CellsSRC(visSectionAction, irow, visActionMenu).RowNameU = "LabelTop"
+        .CellsSRC(visSectionAction, irow, visActionAction).FormulaForceU = "GUARD(SETF(""Controls.TextPosition"",""Width/2"")+SETF(""Controls.TextPosition.Y"",""height+Txtheight/2"")+SETF(""Para.HorzAlign"",""1"")+SETF(GetRef(User.LabelPos),""""""Top""""""))"
+        .CellsSRC(visSectionAction, irow, visActionMenu).FormulaForceU = """&Top"""
+        .CellsSRC(visSectionAction, irow, visActionChecked).FormulaForceU = "STRSAME(User.LabelPos,""Top"")"
+        .CellsSRC(visSectionAction, irow, visActionDisabled).FormulaForceU = "HideText"
+        .CellsSRC(visSectionAction, irow, visActionFlyoutChild).FormulaForceU = "TRUE"
+        
+        'LabelBottom
+        If .CellExists("Actions.LabelBottom", 0) Then
+            irow = .CellsRowIndex("Actions.LabelBottom")
+        Else
+            irow = .AddNamedRow(visSectionAction, "LabelBottom", 0)
+        End If
+        .CellsSRC(visSectionAction, irow, visActionMenu).RowNameU = "LabelBottom"
+        .CellsSRC(visSectionAction, irow, visActionAction).FormulaForceU = "GUARD(SETF(""Controls.TextPosition"",""Width/2"")+SETF(""Controls.TextPosition.Y"",""-Txtheight/2"")+SETF(""Para.HorzAlign"",""1"")+SETF(GetRef(User.LabelPos),""""""Bottom""""""))"
+        .CellsSRC(visSectionAction, irow, visActionMenu).FormulaForceU = """&Bottom"""
+        .CellsSRC(visSectionAction, irow, visActionChecked).FormulaForceU = "STRSAME(User.LabelPos,""Bottom"")"
+        .CellsSRC(visSectionAction, irow, visActionDisabled).FormulaForceU = "HideText"
+        .CellsSRC(visSectionAction, irow, visActionFlyoutChild).FormulaForceU = "TRUE"
+        
+        'LabelLeft
+        If .CellExists("Actions.LabelLeft", 0) Then
+            irow = .CellsRowIndex("Actions.LabelLeft")
+        Else
+            irow = .AddNamedRow(visSectionAction, "LabelLeft", 0)
+        End If
+        .CellsSRC(visSectionAction, irow, visActionMenu).RowNameU = "LabelLeft"
+        .CellsSRC(visSectionAction, irow, visActionAction).FormulaForceU = "GUARD(SETF(""Controls.TextPosition"",""-txtWidth/2"")+SETF(""Controls.TextPosition.Y"",""height/2"")+SETF(""Para.HorzAlign"",""2"")+SETF(GetRef(User.LabelPos),""""""Left""""""))"
+        .CellsSRC(visSectionAction, irow, visActionMenu).FormulaForceU = """&Left"""
+        .CellsSRC(visSectionAction, irow, visActionChecked).FormulaForceU = "STRSAME(User.LabelPos,""Left"")"
+        .CellsSRC(visSectionAction, irow, visActionDisabled).FormulaForceU = "HideText"
+        .CellsSRC(visSectionAction, irow, visActionFlyoutChild).FormulaForceU = "TRUE"
+        
+        'LabelRight
+        If .CellExists("Actions.LabelRight", 0) Then
+            irow = .CellsRowIndex("Actions.LabelRight")
+        Else
+            irow = .AddNamedRow(visSectionAction, "LabelRight", 0)
+        End If
+        .CellsSRC(visSectionAction, irow, visActionMenu).RowNameU = "LabelRight"
+        .CellsSRC(visSectionAction, irow, visActionAction).FormulaForceU = "GUARD(SETF(""Controls.TextPosition"",""Width+txtWidth/2"")+SETF(""Controls.TextPosition.Y"",""height/2"")+SETF(""Para.HorzAlign"",""0"")+SETF(GetRef(User.LabelPos),""""""Right""""""))"
+        .CellsSRC(visSectionAction, irow, visActionMenu).FormulaForceU = """&Right"""
+        .CellsSRC(visSectionAction, irow, visActionChecked).FormulaForceU = "STRSAME(User.LabelPos,""Right"")"
+        .CellsSRC(visSectionAction, irow, visActionDisabled).FormulaForceU = "HideText"
+        .CellsSRC(visSectionAction, irow, visActionFlyoutChild).FormulaForceU = "TRUE"
+        
+        'HideLabel
+        If .CellExists("Actions.HideLabel", 0) Then
+            irow = .CellsRowIndex("Actions.HideLabel")
+        Else
+            irow = .AddNamedRow(visSectionAction, "HideLabel", 0)
+        End If
+        .CellsSRC(visSectionAction, irow, visActionMenu).RowNameU = "HideLabel"
+        .CellsSRC(visSectionAction, irow, visActionAction).FormulaForceU = "SETF(GetRef(HideText),NOT(HideText))"
+        .CellsSRC(visSectionAction, irow, visActionMenu).FormulaForceU = """Hidden"""
+        .CellsSRC(visSectionAction, irow, visActionChecked).FormulaForceU = "HideText"
+        .CellsSRC(visSectionAction, irow, visActionFlyoutChild).FormulaForceU = "TRUE"
+    End With ' shp
+End Sub 'AddLabelActions
