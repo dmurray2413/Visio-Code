@@ -1,0 +1,48 @@
+Private Sub AddLabelActionRows(shp As Shape)
+    On Error Resume Next
+    With shp
+        irow = .AddNamedRow(visSectionAction, "LabelPos", 0)
+        .CellsSRC(visSectionAction, irow, visActionMenu).RowNameU = "LabelPos"
+        .CellsSRC(visSectionAction, irow, visActionMenu).FormulaForceU = """Position"""
+        .CellsSRC(visSectionAction, irow, visActionBeginGroup).FormulaForceU = "true"
+        
+        irow = .AddNamedRow(visSectionAction, "LabelTop", 0)
+        .CellsSRC(visSectionAction, irow, visActionMenu).RowNameU = "LabelTop"
+        .CellsSRC(visSectionAction, irow, visActionAction).FormulaForceU = "GUARD(SETF(""Controls.TextPosition"",""Width/2"")+SETF(""Controls.TextPosition.Y"",""height+Txtheight/2"")+SETF(""Para.HorzAlign"",""1"")+SETF(GetRef(User.LabelPos),""""""Top""""""))"
+        .CellsSRC(visSectionAction, irow, visActionMenu).FormulaForceU = """&Top"""
+        .CellsSRC(visSectionAction, irow, visActionChecked).FormulaForceU = "STRSAME(User.LabelPos,""Top"")"
+        .CellsSRC(visSectionAction, irow, visActionDisabled).FormulaForceU = "HideText"
+        .CellsSRC(visSectionAction, irow, visActionFlyoutChild).FormulaForceU = "TRUE"
+        
+        irow = .AddNamedRow(visSectionAction, "LabelBottom", 0)
+        .CellsSRC(visSectionAction, irow, visActionMenu).RowNameU = "LabelBottom"
+        .CellsSRC(visSectionAction, irow, visActionAction).FormulaForceU = "GUARD(SETF(""Controls.TextPosition"",""Width/2"")+SETF(""Controls.TextPosition.Y"",""-Txtheight/2"")+SETF(""Para.HorzAlign"",""1"")+SETF(GetRef(User.LabelPos),""""""Bottom""""""))"
+        .CellsSRC(visSectionAction, irow, visActionMenu).FormulaForceU = """&Bottom"""
+        .CellsSRC(visSectionAction, irow, visActionChecked).FormulaForceU = "STRSAME(User.LabelPos,""Bottom"")"
+        .CellsSRC(visSectionAction, irow, visActionDisabled).FormulaForceU = "HideText"
+        .CellsSRC(visSectionAction, irow, visActionFlyoutChild).FormulaForceU = "TRUE"
+        
+        irow = .AddNamedRow(visSectionAction, "LabelLeft", 0)
+        .CellsSRC(visSectionAction, irow, visActionMenu).RowNameU = "LabelLeft"
+        .CellsSRC(visSectionAction, irow, visActionAction).FormulaForceU = "GUARD(SETF(""Controls.TextPosition"",""-txtWidth/2"")+SETF(""Controls.TextPosition.Y"",""height/2"")+SETF(""Para.HorzAlign"",""2"")+SETF(GetRef(User.LabelPos),""""""Left""""""))"
+        .CellsSRC(visSectionAction, irow, visActionMenu).FormulaForceU = """&Left"""
+        .CellsSRC(visSectionAction, irow, visActionChecked).FormulaForceU = "STRSAME(User.LabelPos,""Left"")"
+        .CellsSRC(visSectionAction, irow, visActionDisabled).FormulaForceU = "HideText"
+        .CellsSRC(visSectionAction, irow, visActionFlyoutChild).FormulaForceU = "TRUE"
+        
+        irow = .AddNamedRow(visSectionAction, "LabelRight", 0)
+        .CellsSRC(visSectionAction, irow, visActionMenu).RowNameU = "LabelRight"
+        .CellsSRC(visSectionAction, irow, visActionAction).FormulaForceU = "GUARD(SETF(""Controls.TextPosition"",""Width+txtWidth/2"")+SETF(""Controls.TextPosition.Y"",""height/2"")+SETF(""Para.HorzAlign"",""0"")+SETF(GetRef(User.LabelPos),""""""Right""""""))"
+        .CellsSRC(visSectionAction, irow, visActionMenu).FormulaForceU = """&Right"""
+        .CellsSRC(visSectionAction, irow, visActionChecked).FormulaForceU = "STRSAME(User.LabelPos,""Right"")"
+        .CellsSRC(visSectionAction, irow, visActionDisabled).FormulaForceU = "HideText"
+        .CellsSRC(visSectionAction, irow, visActionFlyoutChild).FormulaForceU = "TRUE"
+        
+        irow = .AddNamedRow(visSectionAction, "HideLabel", 0)
+        .CellsSRC(visSectionAction, irow, visActionMenu).RowNameU = "HideLabel"
+        .CellsSRC(visSectionAction, irow, visActionAction).FormulaForceU = "SETF(GetRef(HideText),NOT(HideText))"
+        .CellsSRC(visSectionAction, irow, visActionMenu).FormulaForceU = """Hidden"""
+        .CellsSRC(visSectionAction, irow, visActionChecked).FormulaForceU = "HideText"
+        .CellsSRC(visSectionAction, irow, visActionFlyoutChild).FormulaForceU = "TRUE"
+    End With ' shp
+End Sub ' Private Sub AddLabelActionRows
