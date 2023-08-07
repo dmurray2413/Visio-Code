@@ -1,0 +1,44 @@
+Private Sub DoSomethingWithAllSelectedShapes()
+    ' D.Murray
+    ' see https://learn.microsoft.com/en-us/office/vba/api/visio(enumerations) for native constant enumerations
+    Dim sel As Selection
+    Dim sec As Section
+    Dim shp As Shape
+    
+    Set sel = ActiveWindow.Selection    ' create "selection"
+    
+    For c = 1 To sel.Count              ' iterate all shapes (from first to last) in selection
+        Set shp = sel(c)                ' set current selected shape
+        
+        With shp                        ' do something with the current shape
+            '                           'how many control rows?
+            ' Debug.Print .RowCount(visSectionControls)
+            
+            '                           'Make sure we have a TextPosition section
+            ' reset Label Size
+            .CellsU("TxtWidth").FormulaU = "TEXTWIDTH(TheText)"
+            .CellsU("TxtHeight").FormulaU = "TEXTHEIGHT(TheText,TxtWidth)"
+        
+            '                           'MakeSure we have a TextPosition control
+            If Not .CellExists("controls.TextPosition", 1) Then
+                irow = .AddNamedRow(visSectionControls, "TextPosition", 0)
+            End If
+            ' reset Label Size
+            .CellsU("Controls.TextPosition").FormulaU = "Width*0.5"
+            .CellsU("Controls.TextPosition.Y").FormulaU = "Height*0.5"
+            .CellsU("TxtPinX").FormulaU = "Controls.TextPosition"
+            .CellsU("TxtPinY").FormulaU = "Controls.TextPosition.Y"
+        
+            ' Label Ethernet Controls
+            SpacingPctg = (.CellsU("width") / (.RowCount(visSectionControls) - 1))
+            
+            Debug.Print .RowCount(visSectionControls)
+            For CR = 0 To .RowCount(visSectionControls) - 1
+                Debug.Print "CR: " & CR & " " & .CellsSRC(visSectionControls, CR, 1).Name
+                .CellsSRC(visSectionControls, CR, 1).Name = "Device_" & (CR + 1)
+            Next CR
+        End With                        ' do something with the current shape
+        
+    Next 'c                             ' iterate all shapes (from first to last) in selection
+        
+End Sub 'Private Sub DoSomethingWithAllSelectedShapes
